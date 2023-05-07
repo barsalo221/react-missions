@@ -16,23 +16,41 @@ export default function AddUser() {
   const onInputChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
+  function userFilledAllFields(){
+    return username.trim() && password.trim() && email.trim();
+  }
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:8080/user", user);
-    navigate("/users");
+    if(userFilledAllFields()){
+      await axios.post("http://localhost:8080/user", user)
+      .then((response) => {
+        if(response){
+          console.log(response)
+          navigate("/login");
+              }
+      })
+      .catch((error) => {
+        if(error.response.data.message === "userExists"){
+          alert("username exists, choose another username");
+        }
+      })
+  }
+  else{
+    alert("Please fill all fields");
+  }
   };
 
   return (
     <div>
       <div className="row">
-        <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
-          <h2 className="text-center m-4 text-cyan-400">Register User</h2>
+        <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow bg-white">
+          <h2 className="text-center m-4 text-black">Register User</h2>
 
           <form onSubmit={(e) => onSubmit(e)}>
             <div className="mb-3">
-              <label htmlFor="username" className="form-label">
-              username
+              <label htmlFor="username" className="form-label text-blue-500">
+              USER-NAME
               </label>
               <input
                 type={"text"}
@@ -43,9 +61,9 @@ export default function AddUser() {
                 onChange={(e) => onInputChange(e)}
               />
             </div>
-            <div className="mb-3">
+            <div className="mb-3 text-blue-500">
               <label htmlFor="password" className="form-label">
-                password
+                PASSWORD
               </label>
               <input
                 type={"password"}
@@ -57,8 +75,8 @@ export default function AddUser() {
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="email" className="form-label">
-                email
+              <label htmlFor="email" className="form-label text-blue-500">
+                E-MAIL
               </label>
               <input
                 type={"text"}
@@ -69,12 +87,16 @@ export default function AddUser() {
                 onChange={(e) => onInputChange(e)}
               />
             </div>
-            <button type="submit" className="btn btn-outline-primary">
-              <Link to={'/'}/>
-           </button>
-            <Link className="btn btn-outline-danger mx-2" to="/">
-              Cancel
-            </Link>
+            <div className=" flex-row border-collapse text-center">
+              <button type="submit" className="btn btn-outline-primary mx-16">
+                <Link to={'/'}/>submit
+             </button>
+              <Link className="btn btn-outline-danger mx-16" to="/">
+                Cancel
+             </Link>
+              
+            </div>
+           
           </form>
         </div>
       </div>

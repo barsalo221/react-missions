@@ -18,7 +18,7 @@ function TablePlayers21() {
     <div className=" bg-black flex flex-col overflow-x-auto sm:-mx-6 lg:-mx-8 py-2 sm:px-6 lg:px-8 overflow-hidden min-w-full text-center text-sm font-light">
       <h1 className='text-white'>Player Data</h1>
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <thead className="text-xs uppercase bg-blue-300 dark:bg-gray-700 dark:text-black text-black">
           <tr>
             <th scope="col" class="px-3 py-3 ">Player</th>
             <th scope="col" class="px-3 py-3">Pos</th>
@@ -53,7 +53,7 @@ function TablePlayers21() {
         </thead>
         <tbody>
           {players.map(player => (
-            <tr className="bg-white dark:bg-gray-800" key={player.id}>
+            <tr className="bg-white dark:bg-gray-800 text-black" key={player.id}>
 
                 <td className="px-3 py-4">{player.Player}</td>
                 <td className="px-3 py-4">{player.Pos}</td>

@@ -1,12 +1,16 @@
 import React from 'react'
 import { useState } from 'react'
 import logo from '../images/LogoWeb.png'
-import { Link } from 'react-router-dom';
+import { Link ,useNavigate} from 'react-router-dom';
+import axios from 'axios';
 
-export default function LoginPage() {
+export default function     LoginPage() {
+    let navigate = useNavigate();
 
-    const [user,setUser] = useState({});
-
+    const [user, setUser] = useState({
+        username: "",
+        password: "",
+      });
     function onChange(event){
         const value = event.target.value;
         const field = event.target.getAttribute("data-input"); 
@@ -14,19 +18,37 @@ export default function LoginPage() {
         newUser[field] = value;
         setUser(newUser);
     }
-    function onLoginPress(){
-        fetch("http://localhost:8080/user/login",{
-        method:"POST",body:JSON.stringify(user), 
-        credentials:"omit",
-        headers: {
-            "Content-Type": "application/json",
-          }})
-        .then((res)=>{
-            if(res){
-                document.cookie = `userName=${user.username}`;
-                document.cookie = `password=${user.password}`;
-            }
-        })
+    function userFilledAllFields(){
+        return user.username.trim() && user.password.trim();
+      }
+    const onLoginPress = async (e)=>{
+        e.preventDefault();
+        if(userFilledAllFields()){
+            await axios.post("http://localhost:8080/user/login", user,{
+                body:JSON.stringify(user), 
+                credentials:"omit",
+                headers: {
+                    "Content-Type": "application/json",
+                  }})
+            .then((response)=>{
+                if(response.data === true){
+                    document.cookie = `userName=${user.username}`;
+                    document.cookie = `password=${user.password}`;
+                    navigate("/home")
+                    }else{
+                        alert("User not found, check your password again");
+                    }
+                })
+            .catch((error) => {
+                if(error.response.data.errorMessage === "UserNotFound"){
+                    alert("User not found, check your username or password again");
+                }
+                console.log(error);
+                })
+        }else{
+            alert("Please fill all fields");
+        }
+      
     }
 
     return (
@@ -69,16 +91,14 @@ export default function LoginPage() {
                            
                             <button type="button" 
                             className="w-full text-black bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                            onClick={() => {
-                                onLoginPress();
-                            }}>
-                            <Link className='text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 shadow-lg shadow-teal-500/50 dark:shadow-lg dark:shadow-teal-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2'
-                            to={'/home'}></Link>
+                            onClick={(e) => onLoginPress(e)}>
+                            {/* <Link className='text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 shadow-lg shadow-teal-500/50 dark:shadow-lg dark:shadow-teal-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2'
+                            to={'/home'}></Link> */}
                             
                                 Sign in</button>
                             <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                                 Don’t have an account yet? 
-                                <a href="#" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
+                                <a href="/signup" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
                             </p>
                         </form>
                         </div>

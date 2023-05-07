@@ -2,7 +2,9 @@ import Select from 'react-select';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+
 export const SelectPlayers = () => {
+  
     const options= [
         { teamId: 1610612737, 
           abbreviation: "ATL", 
@@ -245,19 +247,33 @@ export const SelectPlayers = () => {
           location: "Washington"
         }
     
-      ]
+      ] 
       const handleChange = (SelectedOption) => {
         setSelectedValue(SelectedOption);
       }
       const [players, setPlayers] = useState([]);
       const [selectedValue, setSelectedValue] = useState(null);
       const [selectedPlayers , setSelectedPlayers] = useState([])
-    
+
       const handleClickPlayer = (player) => {
-        setSelectedPlayers([...selectedPlayers , player])
-      }
-      const removePlayerUI = () => {
         
+        if(selectedPlayers.length < 5){
+          setSelectedPlayers([...selectedPlayers , player])
+        }
+      }
+      const removePlayerUI = (e) => {
+        const playerName = e.target.getAttribute("data-player");
+        let indexToDelete = -1;
+        for(let i = 0; i < selectedPlayers.length ; i++){
+          if(selectedPlayers[i].Player === playerName){
+            indexToDelete = i;
+        }
+      }
+      if(indexToDelete !== -1){
+        const selectedPlayersClone = [...selectedPlayers];
+        selectedPlayersClone.splice(indexToDelete, 1);
+        setSelectedPlayers(selectedPlayersClone);
+      }
       }
         
     useEffect(() => {
@@ -269,12 +285,12 @@ export const SelectPlayers = () => {
 
       const playersUI = players.map((player, index)=>{
         if(selectedValue){
-          const isPlayerSelected = selectedPlayers.find((curr)=>curr.Player===player.Player);
+          const isPlayerSelected = selectedPlayers.find((curr)=>curr.Player == player.Player);
           if(player.TmID == selectedValue.teamId && !isPlayerSelected){
             return(
               <div className='mb-2 text-s font-semibold text-gray-900 dark:text-white' key={index} onClick={()=>handleClickPlayer(player)}>
                 <table className='w-full text-sm text-left text-black dark:text-gray-400'>
-                <thead className="text-xs text-black uppercase bg-lime-400 dark:bg-gray-700 dark:text-gray-400">
+                <thead className="text-xs text-black uppercase bg-blue-300 dark:bg-gray-700 dark:text-gray-400">
                  <th scope="col" class="px-2 py-2">Player</th>
                  <th scope="col" class="px-2 py-2">Pos</th>
 
@@ -295,90 +311,95 @@ export const SelectPlayers = () => {
       })
     
       const selectedPlayersUI = selectedPlayers.map((player , index)=>{
-            return(
+        
+        if(selectedPlayers.length <= 5){
+          return(
              
-              <div className='relative overflow-x-auto shadow-md sm:rounded-lg ' key={index}>
-                
-               <h3 className='bg-blend-hue text-white '> {player.Player}</h3>
-               <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
-                <thead className="text-xs text-black uppercase bg-red-200 dark:bg-gray-700 dark:text-gray-400">
-                  <tr>
-                    <th scope="col" class="px-2 py-2">Player</th>
-                    <th scope="col" class="px-2 py-2">Pos</th>
-                    <th scope="col" class="px-2 py-2"> Age</th>
-                    <th scope="col" class="px-2 py-2">Tm</th>
-                    <th scope="col" class="px-2 py-2">G</th>
-                    <th scope="col" class="px-2 py-2">GS</th>
-                    <th scope="col" class="px-2 py-2">MP</th>
-                    <th scope="col" class="px-2 py-2">FG</th>
-                    <th scope="col" class="px-2 py-2">FGA</th>
-                    <th scope="col" class="px-2 py-2">FG%</th>
-                    <th scope="col" class="px-2 py-2">3P</th>
-                    <th scope="col" class="px-2 py-2">3PA</th>
-                    <th scope="col" class="px-2 py-2">3P%</th>
-                    <th scope="col" class="px-2 py-2">2P</th>
-                    <th scope="col" class="px-2 py-2">2PA</th>
-                    <th scope="col" class="px-2 py-2">2P%</th>
-                    <th scope="col" class="px-2 py-2">eFG%</th>
-                    <th scope="col" class="px-2 py-2">FT</th>
-                    <th scope="col" class="px-2 py-2">FTA</th>
-                    <th scope="col" class="px-2 py-2">FT%</th>
-                    <th scope="col" class="px-2 py-2">ORB</th>
-                    <th scope="col" class="px-2 py-2">DRB</th>
-                    <th scope="col" class="px-2 py-2">TRB</th>
-                    <th scope="col" class="px-2 py-2">AST</th>
-                    <th scope="col" class="px-2 py-2">STL</th>
-                    <th scope="col" class="px-2 py-2">BLK</th>
-                    <th scope="col" class="px-2 py-2">TOV</th>
-                    <th scope="col" class="px-2 py-2">PF</th>
-                    <th scope="col" class="px-2 py-2">PTS</th>
-                    <th scope="col" class="px-2 py-2">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className='bg-white border-b dark:bg-gray-800 dark:border-black rounded-lg'>
+            <div className='relative overflow-x-auto shadow-md sm:rounded-lg ' key={index}>
+              
+             <h3 className='bg-blend-hue text-white '> {player.Player}</h3>
+             <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
+              <thead className="text-xs text-black uppercase bg-red-200 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                  <th scope="col" class="px-2 py-2">Player</th>
+                  <th scope="col" class="px-2 py-2">Pos</th>
+                  <th scope="col" class="px-2 py-2"> Age</th>
+                  <th scope="col" class="px-2 py-2">Tm</th>
+                  <th scope="col" class="px-2 py-2">G</th>
+                  <th scope="col" class="px-2 py-2">GS</th>
+                  <th scope="col" class="px-2 py-2">MP</th>
+                  <th scope="col" class="px-2 py-2">FG</th>
+                  <th scope="col" class="px-2 py-2">FGA</th>
+                  <th scope="col" class="px-2 py-2">FG%</th>
+                  <th scope="col" class="px-2 py-2">3P</th>
+                  <th scope="col" class="px-2 py-2">3PA</th>
+                  <th scope="col" class="px-2 py-2">3P%</th>
+                  <th scope="col" class="px-2 py-2">2P</th>
+                  <th scope="col" class="px-2 py-2">2PA</th>
+                  <th scope="col" class="px-2 py-2">2P%</th>
+                  <th scope="col" class="px-2 py-2">eFG%</th>
+                  <th scope="col" class="px-2 py-2">FT</th>
+                  <th scope="col" class="px-2 py-2">FTA</th>
+                  <th scope="col" class="px-2 py-2">FT%</th>
+                  <th scope="col" class="px-2 py-2">ORB</th>
+                  <th scope="col" class="px-2 py-2">DRB</th>
+                  <th scope="col" class="px-2 py-2">TRB</th>
+                  <th scope="col" class="px-2 py-2">AST</th>
+                  <th scope="col" class="px-2 py-2">STL</th>
+                  <th scope="col" class="px-2 py-2">BLK</th>
+                  <th scope="col" class="px-2 py-2">TOV</th>
+                  <th scope="col" class="px-2 py-2">PF</th>
+                  <th scope="col" class="px-2 py-2">PTS</th>
+                  <th scope="col" class="px-2 py-2">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className='bg-white border-b dark:bg-gray-800 dark:border-black rounded-lg'>
 
-                    <td  className="px-3 py-4">{player.Player}</td>
-                    <td className="px-3 py-4">{player.Pos}</td>
-                    <td className="px-3 py-4">{player.Age}</td>
-                    <td className="px-3 py-4">{player.Tm}</td>
-                    <td className="px-3 py-4">{player.G}</td>
-                    <td className="px-3 py-4">{player.GS}</td>
-                    <td className="px-3 py-4">{player.MP}</td>
-                    <td className="px-3 py-4">{player.FG}</td>
-                    <td className="px-3 py-4">{player.FGA}</td>
-                    <td className="px-3 py-4">{player.FGP}</td>
-                    <td className="px-3 py-4">{player.threeP}</td>
-                    <td className="px-3 py-4">{player.threePA}</td>
-                    <td className="px-3 py-4">{player.threePP}</td>
-                    <td className="px-3 py-4">{player.twoP}</td>
-                    <td className="px-3 py-4">{player.twoPA}</td>
-                    <td className="px-3 py-4" >{player.twoPP}</td>
-                    <td className="px-3 py-4">{player.EFGP}</td>
-                    <td className="px-3 py-4">{player.FT}</td>
-                    <td className="px-3 py-4">{player.FTA}</td>
-                    <td className="px-3 py-4">{player.FTP}</td>
-                    <td className="px-3 py-4">{player.ORB}</td>
-                    <td className="px-3 py-4">{player.DRB}</td>
-                    <td className="px-3 py-4">{player.TRB}</td>
-                    <td className="px-3 py-4">{player.AST}</td>
-                    <td className="px-3 py-4">{player.STL}</td>
-                    <td className="px-3 py-4">{player.BLK}</td>
-                    <td className="px-3 py-4">{player.TOV}</td>
-                    <td className="px-3 py-4">{player.PF}</td>
-                    <td className="px-3 py-4">{player.PTS}</td>
-                    <td className="px-3 py-4">
-                      <button className =' bg-red-600 text-black rounded-bl-lg rounded-br-lg rounded-t-lg' onClick={ () => removePlayerUI}>delete user</button>
-                    </td>
+                  <td  className="px-3 py-4">{player.Player}</td>
+                  <td className="px-3 py-4">{player.Pos}</td>
+                  <td className="px-3 py-4">{player.Age}</td>
+                  <td className="px-3 py-4">{player.Tm}</td>
+                  <td className="px-3 py-4">{player.G}</td>
+                  <td className="px-3 py-4">{player.GS}</td>
+                  <td className="px-3 py-4">{player.MP}</td>
+                  <td className="px-3 py-4">{player.FG}</td>
+                  <td className="px-3 py-4">{player.FGA}</td>
+                  <td className="px-3 py-4">{player.FGP}</td>
+                  <td className="px-3 py-4">{player.threeP}</td>
+                  <td className="px-3 py-4">{player.threePA}</td>
+                  <td className="px-3 py-4">{player.threePP}</td>
+                  <td className="px-3 py-4">{player.twoP}</td>
+                  <td className="px-3 py-4">{player.twoPA}</td>
+                  <td className="px-3 py-4" >{player.twoPP}</td>
+                  <td className="px-3 py-4">{player.EFGP}</td>
+                  <td className="px-3 py-4">{player.FT}</td>
+                  <td className="px-3 py-4">{player.FTA}</td>
+                  <td className="px-3 py-4">{player.FTP}</td>
+                  <td className="px-3 py-4">{player.ORB}</td>
+                  <td className="px-3 py-4">{player.DRB}</td>
+                  <td className="px-3 py-4">{player.TRB}</td>
+                  <td className="px-3 py-4">{player.AST}</td>
+                  <td className="px-3 py-4">{player.STL}</td>
+                  <td className="px-3 py-4">{player.BLK}</td>
+                  <td className="px-3 py-4">{player.TOV}</td>
+                  <td className="px-3 py-4">{player.PF}</td>
+                  <td className="px-3 py-4">{player.PTS}</td>
+                  <td className="px-3 py-4">
+                    <button className =' bg-red-600 text-black rounded-bl-lg rounded-br-lg rounded-t-lg' data-player={player.Player} onClick={removePlayerUI}>delete user</button>
+                  </td>
 
-                  </tr>
-                </tbody>
+                </tr>
+              </tbody>
 
 
-               </table>
+             </table>
 
-              </div>
-            )
+            </div>
+          )
+
+        }else{}
+            
          
       })
 

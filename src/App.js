@@ -21,6 +21,7 @@ function App() {
     style={{
       backgroundImage: "url(" + ImageGif + ")",
       backgroundSize: "cover",
+      backgroundPosition: 'center',
       height: "100vh"
     }}
     >
@@ -37,6 +38,8 @@ function App() {
           <Route path='/tableplayers' element ={<TablePlayers/>}/>
           <Route path='/tableplayers-22' element = {<TablePlayers22/>}/>
           <Route path='tableplayers-21' element = {<TablePlayers21/>}/>
+          <Route path='tableplayers-21' element = {<TablePlayers21/>}/>
+          
         </Routes>
     </div>
     );
