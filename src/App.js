@@ -13,6 +13,7 @@ import TablePlayers from './components/TablePlayers/TablePlayers'
 import ImageGif from './components/images/logoGif.gif';
 import TablePlayers22 from './components/TablePlayers/TablePlayers22';
 import TablePlayers21 from './components/TablePlayers/TablePlayers21';
+import PredictStats from './components/PredictStats/PredictStats';
 
 function App() {
   
@@ -39,6 +40,8 @@ function App() {
           <Route path='/tableplayers-22' element = {<TablePlayers22/>}/>
           <Route path='tableplayers-21' element = {<TablePlayers21/>}/>
           <Route path='tableplayers-21' element = {<TablePlayers21/>}/>
+          <Route path='predictstats' element = {<PredictStats/>}/>
+
           
         </Routes>
     </div>

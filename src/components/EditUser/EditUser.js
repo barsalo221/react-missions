@@ -24,7 +24,7 @@ export default function EditUser() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.put(`http://localhost:8080/secured/user/${id}`, user);
+    await axios.put(`http://localhost:8080/secured/user/${id}`, user ,{withCredentials : true});
     navigate('/users');
   };
 

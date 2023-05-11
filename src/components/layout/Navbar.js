@@ -7,7 +7,7 @@ export default function Navbar() {
     <div>
     <nav className="navbar navbar-expand-lg navnat-dark bg-black">
         <div className="container-fluid">
-            {/* <img class="object-fill h-10 w-10 " src = {logo}  alt="logo"/> */}
+            <img class="object-fill h-10 w-10 " src = {logo}  alt="logo"/>
             <Link className="navbar-brand text-white container" to={'/'}>
                 
                 NBA-PLAYERS-PREDICT

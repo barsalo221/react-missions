@@ -1,10 +1,13 @@
 import Select from 'react-select';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import ImageGif from '../images/logoGif.gif';
+import { useNavigate } from 'react-router-dom';
 
 
 export const SelectPlayers = () => {
-  
+
+    let navigate = useNavigate();
     const options= [
         { teamId: 1610612737, 
           abbreviation: "ATL", 
@@ -247,7 +250,56 @@ export const SelectPlayers = () => {
           location: "Washington"
         }
     
-      ] 
+        ] 
+
+
+
+
+
+    const sumbitPlayers =  async (selectedPlayers) => {
+      const data = JSON.stringify(selectedPlayers);
+      await axios.post('http://localhost:8080/secured/predictstats',selectedPlayers, {
+        withCredentials: true, 
+})
+      .then(response => {
+        console.log(response.data)
+      })
+      .catch(error => {
+        console.log(error)
+      });
+      navigate("/predictstats")
+      // await axios.post('http://localhost:8080/secured/try',undefined, {
+      //   withCredentials: true, 
+      //   headers: {
+      //       "Content-Type": "application/json",
+      //   }})
+      // .then(response => {
+      //   console.log(response.data)
+      // })
+      // .catch(error => {
+      //   console.log(error)
+      // });
+      navigate("/predictstats")
+
+
+
+
+      // let indexToDelete = -1;
+      //   for(let i = 0; i < selectedPlayers.length ; i++){
+      //     if(selectedPlayers[i].Player === playerName){
+      //       indexToDelete = i;
+      //   }
+      // }
+      // if(indexToDelete !== -1){
+      //   const selectedPlayersClone = [...selectedPlayers];
+      //   selectedPlayersClone.splice(indexToDelete, 1);
+      //   setSelectedPlayers(selectedPlayersClone);
+      // }
+
+
+
+
+      }
       const handleChange = (SelectedOption) => {
         setSelectedValue(SelectedOption);
       }
@@ -293,8 +345,6 @@ export const SelectPlayers = () => {
                 <thead className="text-xs text-black uppercase bg-blue-300 dark:bg-gray-700 dark:text-gray-400">
                  <th scope="col" class="px-2 py-2">Player</th>
                  <th scope="col" class="px-2 py-2">Pos</th>
-
-
                 </thead>
                 <tbody>
                   <tr className='bg-white border-b dark:bg-gray-800 dark:border-black rounded-lg'>
@@ -309,7 +359,8 @@ export const SelectPlayers = () => {
           } 
         }
       })
-    
+     //                            use this method to func sumbitPlayers()
+    //                           !....................................!
       const selectedPlayersUI = selectedPlayers.map((player , index)=>{
         
         if(selectedPlayers.length <= 5){
@@ -354,7 +405,7 @@ export const SelectPlayers = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr className='bg-white border-b dark:bg-gray-800 dark:border-black rounded-lg'>
+                <tr className='bg-white border-b dark:bg-gray-800 dark:border-black rounded-lg text-black'>
 
                   <td  className="px-3 py-4">{player.Player}</td>
                   <td className="px-3 py-4">{player.Pos}</td>
@@ -386,7 +437,7 @@ export const SelectPlayers = () => {
                   <td className="px-3 py-4">{player.PF}</td>
                   <td className="px-3 py-4">{player.PTS}</td>
                   <td className="px-3 py-4">
-                    <button className =' bg-red-600 text-black rounded-bl-lg rounded-br-lg rounded-t-lg' data-player={player.Player} onClick={removePlayerUI}>delete user</button>
+                    <button className =' bg-red-600 text-black rounded-bl-lg rounded-br-lg rounded-t-lg' data-player={player.Player} onClick={removePlayerUI}>delete player</button>
                   </td>
 
                 </tr>
@@ -394,7 +445,9 @@ export const SelectPlayers = () => {
 
 
              </table>
+             
 
+            
             </div>
           )
 
@@ -404,9 +457,9 @@ export const SelectPlayers = () => {
       })
 
       return (
-        <div className='flex-auto bg-scroll' >
+        <div className='flex-auto bg-scroll'>
 
-            <div className='container text-gray-700 text-5xl' >
+            <div className='container text-black text-5xl' >
             Select Team<br className=''/>
            <Select
             className='container text-black'
@@ -415,7 +468,7 @@ export const SelectPlayers = () => {
             onChange={handleChange}
              />
               <br />
-              {/* <pre>{JSON.stringify(selectedValue, null, 2)}</pre> */}
+              <pre>{JSON.stringify(selectedPlayers, null, 2)}</pre>
             </div>
             <div className="flex">
               <div className="w-1/4 m-auto">
@@ -424,11 +477,14 @@ export const SelectPlayers = () => {
               <div className="h-1/3  flex-grow-0" >
                 {selectedPlayersUI}
               </div>                
-            </div>
-              
+            </div> 
+            <button className="container w-full text-black bg-primary-600 hover:bg-blue-400 focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" 
+                   type="button"
+                    onClick={() => {sumbitPlayers(selectedPlayers)}}
+            >
+              sumbit
+            </button>             
           </div>
-          
-          
           
         );
 }
