@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import logo from '../images/LogoWeb.png'
+import logo from '../images/Logo.png'
 import { Link ,useNavigate} from 'react-router-dom';
 import axios from 'axios';
 
@@ -52,14 +52,14 @@ export default function     LoginPage() {
     }
 
     return (
-        <div className=' mt-10 pr-96'>
+        <div className='bg-cyan-300 h-screen '>
             <section className="dark:bg-gray-900 pr-96">
-                <div className="flex flex-col items-center bg-white  mx-auto md:h-screen lg:py-0 bg-transparent ">
+                <div className="flex flex-col items-center mx-auto md:h-screen lg:py-0 bg-transparent ">
                     
-                    <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+                    <div className="container w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700 ">
                         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                             <a href="/" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-                                <img class="w-8 h-8 mr-2 max-w-2xl" src={logo} alt="logo"/>
+                                <img class="w-20 h-20 mr-2 max-w-2xl" src={logo} alt="logo"/>
                                 Pred-Sport    
                             </a>
                             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import logo from '../images/Logo.png'
 
 export default function AddUser() {
   let navigate = useNavigate();
@@ -42,13 +43,15 @@ export default function AddUser() {
   };
 
   return (
-    <div>
-      <div className="row">
-        <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow bg-white">
+    <div className="bg-cyan-300 h-screen ">
+      <img class="object-fill h-48 w-48 bg-transparent container" src = {logo}  alt="image description"/>
+
+      <div className="flex items-center bg-white mx-auto md:h-24- lg:py-0 bg-transparent">
+        <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow bg-white ">
           <h2 className="text-center m-4 text-black">Register User</h2>
 
-          <form onSubmit={(e) => onSubmit(e)}>
-            <div className="mb-3">
+          <form onSubmit={(e) => onSubmit(e)} className="">
+            <div className="mb-3 ">
               <label htmlFor="username" className="form-label text-blue-500">
               USER-NAME
               </label>

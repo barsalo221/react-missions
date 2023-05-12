@@ -13,18 +13,19 @@ import TablePlayers from './components/TablePlayers/TablePlayers'
 import ImageGif from './components/images/logoGif.gif';
 import TablePlayers22 from './components/TablePlayers/TablePlayers22';
 import TablePlayers21 from './components/TablePlayers/TablePlayers21';
-import PredictStats from './components/PredictStats/PredictStats';
+import PredictStats from './components/Predict/PredictStats';
+import Footer from './components/HeaderFooter/Footer';
 
 function App() {
   
   return (
-    <div className='touch-manipulation'
-    style={{
-      backgroundImage: "url(" + ImageGif + ")",
-      backgroundSize: "cover",
-      backgroundPosition: 'center',
-      height: "100vh"
-    }}
+    <div className='touch-manipulation bg-cyan-100 h-screen'
+    // style={{
+    //   backgroundImage: "url(" + ImageGif + ")",
+    //   backgroundSize: "cover",
+    //   backgroundPosition: 'center',
+    //   height: "100vh"
+    // }}
     >
         <Navbar></Navbar>
 
@@ -39,12 +40,16 @@ function App() {
           <Route path='/tableplayers' element ={<TablePlayers/>}/>
           <Route path='/tableplayers-22' element = {<TablePlayers22/>}/>
           <Route path='tableplayers-21' element = {<TablePlayers21/>}/>
-          <Route path='tableplayers-21' element = {<TablePlayers21/>}/>
           <Route path='predictstats' element = {<PredictStats/>}/>
 
           
         </Routes>
+        
+        <div className='mt-auto'>
+          <Footer className= ""></Footer>
+        </div>
     </div>
+    
     );
 }
 

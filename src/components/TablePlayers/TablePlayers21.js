@@ -16,7 +16,7 @@ function TablePlayers21() {
 
   return (
     <div className=" bg-black flex flex-col overflow-x-auto sm:-mx-6 lg:-mx-8 py-2 sm:px-6 lg:px-8 overflow-hidden min-w-full text-center text-sm font-light">
-      <h1 className='text-white'>Player Data</h1>
+      <h1 className='text-white'>Player Data 2021</h1>
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs uppercase bg-blue-300 dark:bg-gray-700 dark:text-black text-black">
           <tr>

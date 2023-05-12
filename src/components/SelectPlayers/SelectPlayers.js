@@ -254,13 +254,13 @@ export const SelectPlayers = () => {
 
 
 
-
-
-    const sumbitPlayers =  async (selectedPlayers) => {
-      const data = JSON.stringify(selectedPlayers);
-      await axios.post('http://localhost:8080/secured/predictstats',selectedPlayers, {
-        withCredentials: true, 
-})
+    const sumbitPlayers = async (selectedPlayers) => {
+      // const data = JSON.stringify(selectedPlayers);
+      // const jsonObject = JSON.parse(data);
+      const selectedPlayersStrings = selectedPlayers.map((player)=>{return Object.values(player)})
+      await axios.post('http://localhost:8080/secured/predictstats', selectedPlayersStrings, {
+        withCredentials: true
+      })
       .then(response => {
         console.log(response.data)
       })
@@ -268,44 +268,16 @@ export const SelectPlayers = () => {
         console.log(error)
       });
       navigate("/predictstats")
-      // await axios.post('http://localhost:8080/secured/try',undefined, {
-      //   withCredentials: true, 
-      //   headers: {
-      //       "Content-Type": "application/json",
-      //   }})
-      // .then(response => {
-      //   console.log(response.data)
-      // })
-      // .catch(error => {
-      //   console.log(error)
-      // });
-      navigate("/predictstats")
-
-
-
-
-      // let indexToDelete = -1;
-      //   for(let i = 0; i < selectedPlayers.length ; i++){
-      //     if(selectedPlayers[i].Player === playerName){
-      //       indexToDelete = i;
-      //   }
-      // }
-      // if(indexToDelete !== -1){
-      //   const selectedPlayersClone = [...selectedPlayers];
-      //   selectedPlayersClone.splice(indexToDelete, 1);
-      //   setSelectedPlayers(selectedPlayersClone);
-      // }
-
-
-
-
       }
+
       const handleChange = (SelectedOption) => {
         setSelectedValue(SelectedOption);
       }
       const [players, setPlayers] = useState([]);
       const [selectedValue, setSelectedValue] = useState(null);
-      const [selectedPlayers , setSelectedPlayers] = useState([])
+      const [selectedPlayers , setSelectedPlayers] = useState([]);
+      const selectedPlayersValues = selectedPlayers.map(player => player.value);
+      
 
       const handleClickPlayer = (player) => {
         
@@ -319,7 +291,7 @@ export const SelectPlayers = () => {
         for(let i = 0; i < selectedPlayers.length ; i++){
           if(selectedPlayers[i].Player === playerName){
             indexToDelete = i;
-        }
+          }
       }
       if(indexToDelete !== -1){
         const selectedPlayersClone = [...selectedPlayers];
@@ -341,8 +313,8 @@ export const SelectPlayers = () => {
           if(player.TmID == selectedValue.teamId && !isPlayerSelected){
             return(
               <div className='mb-2 text-s font-semibold text-gray-900 dark:text-white' key={index} onClick={()=>handleClickPlayer(player)}>
-                <table className='w-full text-sm text-left text-black dark:text-gray-400'>
-                <thead className="text-xs text-black uppercase bg-blue-300 dark:bg-gray-700 dark:text-gray-400">
+                <table className='w-full text-sm text-left text-black dark:text-gray-400 '>
+                <thead className="text-xs text-black uppercase bg-blue-300 dark:bg-gray-700 dark:text-gray-400 ">
                  <th scope="col" class="px-2 py-2">Player</th>
                  <th scope="col" class="px-2 py-2">Pos</th>
                 </thead>
@@ -359,8 +331,7 @@ export const SelectPlayers = () => {
           } 
         }
       })
-     //                            use this method to func sumbitPlayers()
-    //                           !....................................!
+  
       const selectedPlayersUI = selectedPlayers.map((player , index)=>{
         
         if(selectedPlayers.length <= 5){
@@ -368,7 +339,7 @@ export const SelectPlayers = () => {
              
             <div className='relative overflow-x-auto shadow-md sm:rounded-lg ' key={index}>
               
-             <h3 className='bg-blend-hue text-white '> {player.Player}</h3>
+             <h3 className='bg-blend-hue text-black shadow-sm'> {player.Player}</h3>
              <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
               <thead className="text-xs text-black uppercase bg-red-200 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
@@ -457,7 +428,7 @@ export const SelectPlayers = () => {
       })
 
       return (
-        <div className='flex-auto bg-scroll'>
+        <div className='flex-auto bg-scroll bg-cyan-100'>
 
             <div className='container text-black text-5xl' >
             Select Team<br className=''/>
@@ -468,17 +439,17 @@ export const SelectPlayers = () => {
             onChange={handleChange}
              />
               <br />
-              <pre>{JSON.stringify(selectedPlayers, null, 2)}</pre>
+              {/* <pre>{JSON.stringify(selectedPlayers, null, 2)}</pre> */}
             </div>
-            <div className="flex">
+            <div className="flex flex-row bg-cyan-100   ">
               <div className="w-1/4 m-auto">
                 {playersUI}
               </div >
-              <div className="h-1/3  flex-grow-0" >
+              <div className=" mx-6 h-1/3 flex-grow-0 overflow-auto" >
                 {selectedPlayersUI}
               </div>                
-            </div> 
-            <button className="container w-full text-black bg-primary-600 hover:bg-blue-400 focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" 
+            </div >  
+            <button className=" text-black bg-primary-600 hover:bg-blue-400 focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" 
                    type="button"
                     onClick={() => {sumbitPlayers(selectedPlayers)}}
             >

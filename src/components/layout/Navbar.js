@@ -1,30 +1,27 @@
 import React from 'react'
 import { Link } from 'react-router-dom' 
-import logo from '../images/LogoWeb.png'
+import logo from '../images/Logo.png'
 
 export default function Navbar() {
   return (
     <div>
     <nav className="navbar navbar-expand-lg navnat-dark bg-black">
-        <div className="container-fluid">
-            <img class="object-fill h-10 w-10 " src = {logo}  alt="logo"/>
-            <Link className="navbar-brand text-white container" to={'/'}>
-                
-                NBA-PLAYERS-PREDICT
-            </Link> 
+        <div className="container-fluid ">
+          <img class="object-fill h-20 w-20 bg-white " src = {logo}  alt="logo"/>
+          <h1 className='text-white text-base'>Pred-Sport</h1> 
             
-            <button 
+            {/* <button 
             className="navbar-toggler" 
             type="button" 
             data-bs-toggle="collapse" 
             data-bs-target="#navbarSupportedContent" 
             aria-controls="navbarSupportedContent" 
             aria-expanded="false" 
-            aria-label="Toggle navigation">hi
+            aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
-            </button>
-
-            <Link className='btn btn-outline-light' to='/signup'>ADD USER</Link>
+            </button> */}
+            
+            <Link className='btn btn-outline-light' to='/home'> home</Link>
         </div> 
     </nav>
 
