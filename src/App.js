@@ -16,6 +16,7 @@ import TablePlayers21 from './components/TablePlayers/TablePlayers21';
 import PredictStats from './components/Predict/PredictStats';
 import Footer from './components/HeaderFooter/Footer';
 
+
 function App() {
   
   return (
@@ -39,15 +40,16 @@ function App() {
           <Route path='/viewuser/:id' element ={<ViewUser/>}/>
           <Route path='/tableplayers' element ={<TablePlayers/>}/>
           <Route path='/tableplayers-22' element = {<TablePlayers22/>}/>
-          <Route path='tableplayers-21' element = {<TablePlayers21/>}/>
-          <Route path='predictstats' element = {<PredictStats/>}/>
+          <Route path='/tableplayers-21' element = {<TablePlayers21/>}/>
+          <Route path='/predictstats' element = {<PredictStats/>}/>
+
 
           
         </Routes>
-        
-        <div className='mt-auto'>
-          <Footer className= ""></Footer>
+        <div>
+          <Footer/>
         </div>
+        
     </div>
     
     );

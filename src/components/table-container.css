@@ -1,0 +1,23 @@
+.table-container {
+    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: 400px; /* Adjust the max-height to your preference */
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  thead {
+    position: sticky;
+    top: 0;
+    background-color: #f5f5f5;
+  }
+  
+  th {
+    padding: 8px;
+    text-align: left;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+  }
+  

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import '../table-container.css';
 
 function TablePlayers22() {
   const [players, setPlayers] = useState([]);
@@ -15,8 +16,8 @@ function TablePlayers22() {
   }, []);
 
   return (
-    <div className=" bg-black flex flex-col overflow-x-auto sm:-mx-6 lg:-mx-8 py-2 sm:px-6 lg:px-8 overflow-hidden min-w-full text-center text-sm font-light">
-      <h1 className='text-white'>Player Data 2022</h1>
+    <div>
+      <h1 className='text-black text-center font-sans font-extrabold'>Player Data 2022</h1>
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-black uppercase bg-blue-300 dark:bg-gray-700 dark:text-gray-400">
           <tr>
@@ -55,7 +56,7 @@ function TablePlayers22() {
           {players.map(player => (
             <tr className="bg-white dark:bg-gray-800 text-black" key={player.id}>
 
-                <td className="px-3 py-4">{player.Player}</td>
+                <td className="px-3 py-4 text-blue-700">{player.Player}</td>
                 <td className="px-3 py-4">{player.Pos}</td>
                 <td className="px-3 py-4">{player.Age}</td>
                 <td className="px-3 py-4">{player.Tm}</td>
