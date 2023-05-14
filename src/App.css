@@ -3,6 +3,8 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-self: center;
+  align-items: center;
 }
 
 .App-logo {

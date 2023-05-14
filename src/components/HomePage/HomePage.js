@@ -8,7 +8,7 @@ const HomePage = () => {
     <div className='rounded-bl-lg mt-32 bg-cyan-100 h-screen shadow container' >
       <h1 className="mb-4 text-3xl font-extrabold text-gray-900 dark:text-emerald-400 md:text-5xl lg:text-6xl"><span className="text-transparent font-sans bg-clip-text bg-gradient-to-r to-lime-300 from-teal-300">Welcome To</span> <span className="text-transparent font-sans bg-clip-text bg-gradient-to-r to-yellow-300 from-red-300">Pred Sport</span> <></></h1>
       <img className="object-fill h-48 w-48 bg-transparent " src = {logo}  alt="image description"/>
-      <p className="text-lg font-bold font-sans text-cyan-300 lg:text-2xl dark:text-black">Here at Pred-Sport we focus on NBA players, statistics and predict the future statistics of players<br/> come in to try and be impressed.</p>
+      <p className="text-lg font-bold font-sans text-yellow-300 lg:text-2xl dark:text-black">Here at Pred-Sport we focus on NBA players, statistics and predict the future statistics of players<br/> come in to try and be impressed.</p>
 
       <div className='mt-52'>
 

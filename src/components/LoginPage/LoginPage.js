@@ -52,16 +52,24 @@ export default function LoginPage() {
     }
 
     return (
-        <div className='bg-cyan-300 h-screen '>
-            <section className="dark:bg-gray-900 pr-96">
-                <div className="flex flex-col items-center mx-auto md:h-screen lg:py-0 bg-transparent mb-28">
+        <div className='bg-cyan-300'>
+            <div className='container mb-8  '>
+                <h1 className=''>
+                    <a href="/" className="items-center mt-20 mb-20 text-2xl font-semibold text-gray-900 dark:text-white">
+                    <img class="mr-16 w-40 h-40 max-w-2xl container" src={logo} alt="logo"/>
+                    </a>
+                Pred - Sport</h1> 
+            </div>
+            <section className="dark:bg-gray-900 pr-96 container h-screen">
+                <div className="flex flex-col items-center mx-auto md:h-screen lg:py-0 bg-transparent mb-28 ">
                     
-                    <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700 ml-72 ">
+                    <div className=" w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700 ml-72 ">
                         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                            <a href="/" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-                                <img class="mr-16 w-20 h-20 max-w-2xl" src={logo} alt="logo"/>
-                                Pred-Sport    
-                            </a>
+                            <h1 className='container'>
+                                Sign in 
+
+                            </h1>   
+                            
                             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                             Sign in to your account
                         </h1>
@@ -105,27 +113,6 @@ export default function LoginPage() {
                     </div>
                 </div>
             </section>
-
-            {/* <h1>LoginPage</h1>
-            <label className='block text-gray-700 text-sm font-bold mb-2'>
-                username
-            </label>
-            <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' 
-            value={user.username} 
-            onChange={onChange} 
-            data-input="username"  
-            type = 'username'/>
-
-            <label className='block text-gray-700 text-sm font-bold mb-2 mt-20'>
-                password
-            </label>
-            <input  className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-             value={user.password} 
-             onChange={onChange} 
-             data-input="password" 
-             type='password'/>
-
-            <button className='mt-10' onClick={onLoginPress}>submit</button> */}
 
         </div>
 
