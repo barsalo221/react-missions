@@ -8,7 +8,7 @@ const Footer = () => {
                 <p class="mb-4 text-sm text-center text-white dark:text-gray-400 sm:mb-0">
                     &copy; 2022-2023 All rights reserved Bar Salomon.
                 </p>
-                <div class="flex justify-center items-center space-x-1"></div>
+                {/* <div class="flex justify-center items-center space-x-1"></div> */}
             </footer>
         </div>
     );

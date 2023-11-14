@@ -12,10 +12,9 @@ export const SelectPlayers = () => {
 
     let navigate = useNavigate();
     const options= jsonTeams;
+  
 
-
-
-    const sumbitPlayers = async (selectedPlayers) => {
+    const submitPlayer = async (selectedPlayers) => {
       // const data = JSON.stringify(selectedPlayers);
       // const jsonObject = JSON.parse(data);
       const selectedPlayersStrings = selectedPlayers.map((player)=>{return Object.values(player)})
@@ -41,7 +40,6 @@ export const SelectPlayers = () => {
 
 
       const handleClickPlayer = (player) => {
-        
         if(selectedPlayers.length < 5){
           setSelectedPlayers([...selectedPlayers , player])
         }
@@ -62,7 +60,7 @@ export const SelectPlayers = () => {
       }
         
     useEffect(() => {
-      axios.get('http://localhost:8080/secured/data',{ withCredentials: true })
+      axios.get('http://localhost:8080/secured/data24',{ withCredentials: true })
         .then(response =>{ 
           setPlayers(response.data)})
         .catch(error => console.log(error));
@@ -71,7 +69,7 @@ export const SelectPlayers = () => {
       const playersUI = players.map((player, index)=>{
         if(selectedValue){
           const isPlayerSelected = selectedPlayers.find((curr)=>curr.Player == player.Player);
-          if(player.TmID == selectedValue.teamId && !isPlayerSelected){
+          if(player.TeamId == selectedValue.teamId && !isPlayerSelected){
             return(
               <div className='mb-2 text-s font-semibold text-gray-900 dark:text-white bg-cyan-100 grid-flow-col' key={index} onClick={()=>handleClickPlayer(player)}>
                 <table className='w-full text-sm text-left text-black dark:text-gray-400 '>
@@ -99,14 +97,12 @@ export const SelectPlayers = () => {
         
         if(selectedPlayers.length <= 5){
           return(
-             
-            <div className='relative overflow-x-auto shadow-md sm:rounded-lg bg-cyan-100 ' key={index}>
+            <div className='relative overflow-x-auto shadow-md sm:rounded-lg bg-white p-2 mt-2' key={index}>
               
              <h3 className='bg-blend-hue text-black shadow-sm'> {player.Player}</h3>
              <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
               <thead className="text-xs text-black uppercase bg-red-200 dark:bg-gray-700 dark:text-gray-400">
-                <tr>
-                  <th scope="col" class="px-2 py-2">Player</th>
+                <tr> 
                   <th scope="col" class="px-2 py-2">Pos</th>
                   <th scope="col" class="px-2 py-2"> Age</th>
                   <th scope="col" class="px-2 py-2">Tm</th>
@@ -140,11 +136,9 @@ export const SelectPlayers = () => {
               </thead>
               <tbody>
                 <tr className='bg-white border-b dark:bg-gray-800 dark:border-black rounded-lg text-black'>
-
-                  <td  className="px-3 py-4">{player.Player}</td>
                   <td className="px-3 py-4">{player.Pos}</td>
                   <td className="px-3 py-4">{player.Age}</td>
-                  <td className="px-3 py-4">{player.Tm}</td>
+                  <td className="px-3 py-4">{player.TM}</td>
                   <td className="px-3 py-4">{player.G}</td>
                   <td className="px-3 py-4">{player.GS}</td>
                   <td className="px-3 py-4">{player.MP}</td>
@@ -176,72 +170,82 @@ export const SelectPlayers = () => {
 
                 </tr>
               </tbody>
-
-
              </table>
-             
-
-            
             </div>
           )
 
         }else{}
       })
-      const customStyles = {
+
+      const lightBlueStyles = {
         option: (provided, state) => ({
           ...provided,
-          borderBottom: '1px dotted pink',
-          color: state.isSelected ? 'red' : 'blue',
-          padding: 20,
+          borderBottom: '1px solid #b3e0f2', // Light blue border bottom
+          color: state.isSelected ? 'white' : '#0077cc', // White text for selected, light blue for unselected
+          backgroundColor: state.isFocused ? '#b3e0f2' : 'white', // Light blue background when focused
+          padding: 12, // Adjust padding
         }),
-        control: () => ({
-          // none of react-select's styles are passed to <Control />
-          width: 200,
+        control: (provided, state) => ({
+          ...provided,
+          width: 250, // Adjust the width of the control
+          border: '2px solid #b3e0f2', // Light blue border
+          borderRadius: 8, // Add border radius
+          boxShadow: state.isFocused ? '0 0 10px rgba(0, 119, 204, 0.5)' : 'none', // Light blue box shadow when focused
         }),
-        singleValue: (provided, state) => {
-          const opacity = state.isDisabled ? 0.5 : 1;
-          const transition = 'opacity 300ms';
-      
-          return { ...provided, opacity, transition };
-        }
-      }
-
+        singleValue: (provided) => ({
+          ...provided,
+          color: '#0077cc', // Light blue text color
+          fontSize: '16px', // Change font size
+          fontWeight: 'bold', // Apply bold style
+        }),
+      };
       return (
-        <div className='bg-cyan-100'>
-
-            <div className=' text-black' >
-               <h1 className="text-center mb-4 text-3xl font-extrabold text-gray-900 dark:text-emerald-400 md:text-5xl lg:text-6xl"><span className="text-transparent font-sans bg-clip-text bg-gradient-to-r to-red-500 from-blue-500">Pred - Sport </span> <span className="text-transparent font-sans bg-clip-text bg-gradient-to-r to-red-500 from-blue-500">Predict Stats</span> <></></h1>
-               <p className='text-3xl text'>Wellcome {cookies.userName}!</p>
-               <img className="object-fill h-48 w-48 bg-transparent container" src = {logo}  alt="image description"/>
-            <p className='text-center mb-3 font-extrabold text-black md:text-xl dark:text-gray-400'><br/> On the site you can choose players from all NBA teams<br/> after
-            We will make a prediction on their statistics with the help of our<br/> linear regression model and show the amount of future points they will make
-            have fun </p><br/>
-           <Select
-            className='text-black container'
-            value={selectedValue}
-            options = {options}
-            onChange={handleChange}
-            styles={customStyles}
-             />
-            
+        <div className='bg-cyan-100'
+        style={{
+          backgroundImage: "url(" + ImageGif + ")",
+          backgroundSize: "cover",
+          backgroundPosition: 'center',
+        }}
+        >
+          <div className=' text-black'>
+            <h1 className="text-center mb-4 text-3xl font-extrabold text-gray-900 dark:text-emerald-400 md:text-5xl lg:text-6xl p-16"><span className="text-transparent font-sans bg-clip-text bg-gradient-to-r to-red-500 from-blue-500">Pred - Sport </span> <span className="text-transparent font-sans bg-clip-text bg-gradient-to-r to-red-500 from-blue-500">Predict Stats</span> <></></h1>
+            <div className="flex flex-col rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 md:max-w-xl md:flex-row container p-2 mb-10">
+              <img className="h-96 w-full rounded-t-lg object-cover md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src= {logo} alt="" />
+              <div className="flex flex-col justify-start p-6">
+                <p className="mb-4 text-base text-neutral-600 dark:text-neutral-200">
+                  <br/> On the site you can choose players from all NBA teams<br/> after
+                  We will make a prediction on their statistics with the help of our<br/> linear regression model and show the amount of future points they will make.<br/>
+                  have fun
+                </p>
+                <Select
+                className='text-black container'
+                value={selectedValue}
+                options = {options}
+                onChange={handleChange}
+                styles={lightBlueStyles}
+                />
+              </div>
             </div>
-            <div className="flex bg-cyan-100">
-              <div className="w-auto m-auto">
+          </div>
+            <div className = "flex bg-transparent">
+              <div className = "w-auto m-auto p-10">
                 {playersUI}
               </div >
-              <div className=" mx-6 h-auto flex-grow-0 overflow-auto" >
+              <div className=" mx-6 mt-8 h-auto flex-grow-0 overflow-auto " >
                 {selectedPlayersUI}
               </div>                
-            </div>  
-            <div className='container'>
-            <button className=" text-black bg-primary-600 hover:bg-blue-400 focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" 
-                    type="button"
-                    onClick={() => {
-                    sumbitPlayers(selectedPlayers)}}
-            >
-              sumbit
-            </button> 
             </div>
+            {selectedPlayers.length === 5 && (
+              <div className='container'>
+                <button
+                className="text-black bg-primary-600 hover:bg-blue-400 focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                type="button"
+                onClick={() => submitPlayer(selectedPlayers)}
+                >
+                Submit
+                </button>
+            </div>
+            )}
                         
           </div>
           

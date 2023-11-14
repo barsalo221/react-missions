@@ -16,7 +16,7 @@
 },
 {
   "teamId": 1610612751,
-  "abbreviation": "BKN",
+  "abbreviation": "BRK",
   "teamName": "Brooklyn Nets",
   "value": "Brooklyn Nets", 
   "label": "Brooklyn Nets",
@@ -25,7 +25,7 @@
 },
 {
   "teamId": 1610612766,
-  "abbreviation": "CHA",
+  "abbreviation": "CHO",
   "value": "Charlotte Hornets", 
   "label": "Charlotte Hornets",
   "simpleName": "Hornets",
@@ -185,7 +185,7 @@
 },
 {
   "teamId": 1610612756,
-  "abbreviation": "PHX",
+  "abbreviation": "PHO",
   "value": "Phoenix Suns", 
   "label": "Phoenix Suns",
   "simpleName": "Suns",

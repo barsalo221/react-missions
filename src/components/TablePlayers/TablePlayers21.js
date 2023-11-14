@@ -24,7 +24,7 @@ export default function TablePlayers21() {
     const playersUI = players.map((player, index)=>{
       if(selectedValue){
         const isPlayerSelected = selectedPlayers.find((curr)=>curr.Player == player.Player);
-        if(player.TmID == selectedValue.teamId){
+        if(player.TeamId == selectedValue.teamId){
           return(
             <div className='mb-2 text-s font-semibold text-gray-900 dark:text-white bg-cyan-100 grid-flow-col' key={index}>
               <table className='w-full text-sm text-left text-black dark:text-gray-400 '>
@@ -66,7 +66,7 @@ export default function TablePlayers21() {
                 <td  className="px-3 py-4">{player.Player}</td>
                 <td className="px-3 py-4">{player.Pos}</td>
                 <td className="px-3 py-4">{player.Age}</td>
-                <td className="px-3 py-4">{player.Tm}</td>
+                <td className="px-3 py-4">{player.TM}</td>
                 <td className="px-3 py-4">{player.G}</td>
                 <td className="px-3 py-4">{player.GS}</td>
                 <td className="px-3 py-4">{player.MP}</td>
@@ -124,12 +124,12 @@ export default function TablePlayers21() {
     <div>  
       
       <div className='bg-cyan-100'>
-            <h1 className="text-center mb-4 text-3xl font-extrabold  md:text-5xl lg:text-6xl"><span className="text-transparent font-sans bg-clip-text bg-gradient-to-r to-yellow-300 from-black">Pred - Sport </span> <span className="text-transparent font-sans bg-clip-text bg-gradient-to-r to-yellow-300 from-black">Players Stats 2021</span></h1>
+            <h1 className="text-center mb-4 text-3xl font-extrabold  md:text-5xl lg:text-6xl p-16"><span className="text-transparent font-sans bg-clip-text bg-gradient-to-r to-yellow-300 from-black">Pred - Sport </span> <span className="text-transparent font-sans bg-clip-text bg-gradient-to-r to-yellow-300 from-black">Players Stats 2021</span></h1>
                <img className="object-fill h-48 w-48 bg-transparent container" src = {logo}  alt="image description"/>
           <div className=' text-black' >
              
          <Select
-          className='text-black text-2xl w-full container font-extrabold'
+          className='text-black text-2xl w-full container font-extrabold p-20'
           value={selectedValue}
           options = {options}
           onChange={handleChange}

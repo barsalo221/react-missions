@@ -9,10 +9,11 @@ import AddUser from './components/AddUser/AddUser';
 import EditUser from './components/EditUser/EditUser';
 import ViewUser from './components/ViewUser/ViewUser';
 import LoginPage from './components/LoginPage/LoginPage';
-import TablePlayers from './components/TablePlayers/TablePlayers'
+import TablePlayers23 from './components/TablePlayers/TablePlayers23'
 import ImageGif from './components/images/logoGif.gif';
 import TablePlayers22 from './components/TablePlayers/TablePlayers22';
 import TablePlayers21 from './components/TablePlayers/TablePlayers21';
+import TablePlayers24 from './components/TablePlayers/TablePlayers24'
 import PredictStats from './components/Predict/PredictStats';
 import Footer from './components/HeaderFooter/Footer';
 
@@ -38,22 +39,20 @@ function App() {
           <Route path='/login' element ={<LoginPage/>}/>
           <Route path='/edituser/:id' element ={<EditUser/>}/>
           <Route path='/viewuser/:id' element ={<ViewUser/>}/>
-          <Route path='/tableplayers' element ={<TablePlayers/>}/>
+          <Route path='/tableplayers-23' element ={<TablePlayers23/>}/>
           <Route path='/tableplayers-22' element = {<TablePlayers22/>}/>
           <Route path='/tableplayers-21' element = {<TablePlayers21/>}/>
           <Route path='/predictstats' element = {<PredictStats/>}/>
+          <Route path='/tableplayers-24' element = {<TablePlayers24/>}/>
 
-
-          
         </Routes>
-        <div>
+    
           <Footer/>
-        </div>
+        
         
     </div>
     
     );
 }
-
 
 export default App;
