@@ -17,13 +17,16 @@ const HomePage = () => {
     >
       
       <h1 className="mb-4 text-3xl font-extrabold text-gray-900 dark:text-emerald-400 md:text-5xl lg:text-6xl"><span className="text-transparent font-sans bg-clip-text bg-gradient-to-r to-lime-300 from-teal-300">Welcome To</span> <span className="text-transparent font-sans bg-clip-text bg-gradient-to-r to-yellow-300 from-red-300">Pred Sport</span> <></></h1>
-      
-      <div className="flex flex-col rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 md:max-w-xl md:flex-row container p-3 mb-10 mt-10">
-        <img className="h-96 w-full rounded-t-lg object-cover md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src= {logo} alt="" />
-        <div className="flex flex-col justify-start p-6">
-          <p className="mb-4 text-lg text-neutral-600 dark:text-neutral-200">Here at Pred-Sport we focus on NBA players, statistics and predict the future statistics of players<br/> come in to try and be impressed.</p>
+      <div className='container'>
+
+        <div className="flex flex-col rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 md:max-w-xl md:flex-row p-6 mb-10 mt-10">
+          <img className="h-96 w-full rounded-t-lg object-cover md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src= {logo} alt="" />
+          <div className="flex flex-col justify-start p-6">
+            <p className="mb-4 text-lg text-neutral-600 dark:text-neutral-200">Here at Pred-Sport we focus on NBA players, statistics and predict the future statistics of players<br/> come in to try and be impressed.</p>
+          </div>
         </div>
       </div>
+
       <div className='mt-40'>
 
         <button 
@@ -41,7 +44,7 @@ const HomePage = () => {
         Sign Up</button>
       
       </div>
-      </div>
+    </div>
   );
 };
 

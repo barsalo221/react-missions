@@ -4,7 +4,7 @@ import { useCookies } from 'react-cookie';
 import logo from '../images/Logo.png';
 
 export default function Navbar() {
-  const [cookies, setCookies, removeCookies] = useCookies(['username', 'password']);
+  const [cookies, setCookies, removeCookies] = useCookies(['userName', 'password']);
 
   const handleLogout = () => {
     // Remove the cookies and redirect to the home page
@@ -17,7 +17,10 @@ export default function Navbar() {
       <div className="flex items-center justify-between">
         <div className="text-white text-2xl">
           <img className="md:cursor-pointer w-20 h-13 " src={logo} alt="logo" />
+          
         </div>
+        {cookies.userName != null  && cookies.password != null && (<h2 className='text-white'> Welcome {cookies.userName} </h2>)}
+        
         <div className="hidden md:flex space-x-4">
           <Link className='py-5 px-3 inline-block hover:bg-gray-700 text-white' to='/home'> home</Link>
           <div className="group relative">

@@ -131,7 +131,7 @@ export const SelectPlayers = () => {
                   <th scope="col" class="px-2 py-2">TOV</th>
                   <th scope="col" class="px-2 py-2">PF</th>
                   <th scope="col" class="px-2 py-2">PTS</th>
-                  <th scope="col" class="px-2 py-2">Action</th>
+                  <th scope="col" class="px-2 py-2">action</th>
                 </tr>
               </thead>
               <tbody>
@@ -209,9 +209,11 @@ export const SelectPlayers = () => {
         >
           <div className=' text-black'>
             <h1 className="text-center mb-4 text-3xl font-extrabold text-gray-900 dark:text-emerald-400 md:text-5xl lg:text-6xl p-16"><span className="text-transparent font-sans bg-clip-text bg-gradient-to-r to-red-500 from-blue-500">Pred - Sport </span> <span className="text-transparent font-sans bg-clip-text bg-gradient-to-r to-red-500 from-blue-500">Predict Stats</span> <></></h1>
-            <div className="flex flex-col rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 md:max-w-xl md:flex-row container p-2 mb-10">
-              <img className="h-96 w-full rounded-t-lg object-cover md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src= {logo} alt="" />
+            <div className='container'>
+            <div className="flex flex-col rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 md:max-w-xl md:flex-row p-2 mb-10">
+              <img className=" rounded-t-lg object-cover md:h-auto md:w-52 md:rounded-none md:rounded-l-lg" src= {logo} alt="" />
               <div className="flex flex-col justify-start p-6">
+                <h1 className='container'>prediction of points</h1>
                 <p className="mb-4 text-base text-neutral-600 dark:text-neutral-200">
                   <br/> On the site you can choose players from all NBA teams<br/> after
                   We will make a prediction on their statistics with the help of our<br/> linear regression model and show the amount of future points they will make.<br/>
@@ -226,6 +228,8 @@ export const SelectPlayers = () => {
                 />
               </div>
             </div>
+            </div>
+
           </div>
             <div className = "flex bg-transparent">
               <div className = "w-auto m-auto p-10">
