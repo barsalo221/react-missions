@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 
 export default function EditUser() {
   let navigate = useNavigate();
-  const {id} = useParams();
+  const { id } = useParams();
 
   const [user, setUser] = useState({
     username: "",
@@ -12,9 +12,9 @@ export default function EditUser() {
     email: "",
   });
 
-  useEffect( () => {
-    loadUser()
-  }, [])
+  useEffect(() => {
+    loadUser();
+  }, []);
 
   const { username, password, email } = user;
 
@@ -24,14 +24,16 @@ export default function EditUser() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.put(`http://localhost:8080/secured/user/${id}`, user ,{withCredentials : true});
-    navigate('/users');
+    await axios.put(`http://localhost:8080/secured/user/${id}`, user, {
+      withCredentials: true,
+    });
+    navigate("/users");
   };
 
-  const loadUser = async () =>{
-    const result = await axios.get(`http://localhost:8080/secured/user/${id}`)
-    setUser(result.data)
-  }
+  const loadUser = async () => {
+    const result = await axios.get(`http://localhost:8080/secured/user/${id}`);
+    setUser(result.data);
+  };
 
   return (
     <div>
@@ -42,7 +44,7 @@ export default function EditUser() {
           <form onSubmit={(e) => onSubmit(e)}>
             <div className="mb-3">
               <label htmlFor="username" className="form-label">
-              username
+                username
               </label>
               <input
                 type={"text"}

@@ -1,6 +1,5 @@
-
 import axios from "axios";
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 export default function ViewUser() {
@@ -17,13 +16,14 @@ export default function ViewUser() {
   }, []);
 
   const loadUser = async () => {
-    await axios.get(`http://localhost:8080/secured/user/${id}`,{ withCredentials: true } )
-    .then(response => {
-      setUser(response.data);
-    })
-    .catch(error =>
-    console.log(error));
-
+    await axios
+      .get(`http://localhost:8080/secured/user/${id}`, {
+        withCredentials: true,
+      })
+      .then((response) => {
+        setUser(response.data);
+      })
+      .catch((error) => console.log(error));
   };
 
   return (

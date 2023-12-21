@@ -1,0 +1,4 @@
+.Login {
+    backdrop-filter: blur(100px);
+    background: rgba(212, 255, 0, 0.2);
+}

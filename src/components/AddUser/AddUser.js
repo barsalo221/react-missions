@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import logo from '../images/Logo.png'
+import logo from "../images/Logo.png";
 
 export default function AddUser() {
   let navigate = useNavigate();
@@ -17,43 +17,47 @@ export default function AddUser() {
   const onInputChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
-  function userFilledAllFields(){
+  function userFilledAllFields() {
     return username.trim() && password.trim() && email.trim();
   }
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    if(userFilledAllFields()){
-      await axios.post("http://localhost:8080/user", user)
-      .then((response) => {
-        if(response){
-          console.log(response)
-          navigate("/login");
-              }
-      })
-      .catch((error) => {
-        if(error.response.data.message === "userExists"){
-          alert("username exists, choose another username");
-        }
-      })
-  }
-  else{
-    alert("Please fill all fields");
-  }
+    if (userFilledAllFields()) {
+      await axios
+        .post("http://localhost:8080/user", user)
+        .then((response) => {
+          if (response) {
+            console.log(response);
+            navigate("/login");
+          }
+        })
+        .catch((error) => {
+          if (error.response.data.message === "userExists") {
+            alert("username exists, choose another username");
+          }
+        });
+    } else {
+      alert("Please fill all fields");
+    }
   };
 
   return (
-    <div className="bg-cyan-300 h-screen ">
-      <img class="object-fill h-48 w-48 bg-transparent container" src = {logo}  alt="image description"/>
+    <div className="p-4">
+      <img
+        class="object-fill h-48 w-48 bg-transparent container"
+        src={logo}
+        alt="image description"
+      />
 
-      <div className="flex items-center bg-white mx-auto md:h-24- lg:py-0 bg-transparent">
-        <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow bg-white ">
+      <div className="flex items-center bg-white mx-auto md:h-24- lg:py-0 bg-transparent p-5">
+        <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow bg-white">
           <h2 className="text-center m-4 text-black">Register User</h2>
 
-          <form onSubmit={(e) => onSubmit(e)} className="">
-            <div className="mb-3 ">
+          <form onSubmit={(e) => onSubmit(e)} className="p-3">
+            <div className="mb-3  ">
               <label htmlFor="username" className="form-label text-blue-500">
-              USER-NAME
+                USER-NAME
               </label>
               <input
                 type={"text"}
@@ -92,14 +96,13 @@ export default function AddUser() {
             </div>
             <div className=" flex-row border-collapse text-center">
               <button type="submit" className="btn btn-outline-primary mx-16">
-                <Link to={'/'}/>submit
-             </button>
+                <Link to={"/"} />
+                submit
+              </button>
               <Link className="btn btn-outline-danger mx-16" to="/">
                 Cancel
-             </Link>
-              
+              </Link>
             </div>
-           
           </form>
         </div>
       </div>
